@@ -1,0 +1,67 @@
+/*Application*/
+body {
+    font-family: helvetica;
+    background-color: #E5E6E6;
+}
+#main_container {
+    width: 1000px;
+    margin: 0 auto;
+    overflow: auto;
+    background-color: #FFFFFF;
+}
+#main_header {
+    /*width: inherit;*/
+    
+}
+#signout_btn_container {
+    overflow: auto;
+}
+#title {
+    font-size: 35px;
+    text-align: center;
+}
+#title h1 {
+    margin: 5px;
+}
+#nav_bar {
+    margin: 0 auto;
+    padding: 0;
+}
+#nav_bar li {
+    display: inline;
+    padding: 0 58px;
+}
+
+/*Sign In*/
+#sign_in {
+    width: 320px;
+    margin: 0 auto 10px auto;
+    overflow: auto;
+    text-align: center;
+    border: 1px solid #E5E6E6;
+}
+#sign_in h1 {
+    margin: 5px;
+}
+.signin_input {
+    padding-bottom: 10px;
+    width: 180px;
+    margin: 0 auto;
+}
+.signin_input div {
+    text-align: left;
+}
+.signin_input input {
+    width: 180px;
+}
+
+/*Index*/
+.index_word {
+    font-size: 30px;
+}
+
+@media (max-width: 500px) {
+    #main_container {
+        display: none;
+    }
+}

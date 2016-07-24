@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Eyrie Vacay</title>
+      <%= stylesheet_link_tag    'application', media: 'screen', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+      <%= csrf_meta_tags %>
+    </head>
+    <body>
+        <div id="main_container">
+            <div id="main_header">
+                <div id="title">
+                    <h1>EYRIE VACAY</h1>
+                </div>
+        <% if logged_in? %>
+                <ul id="nav_bar">
+                    <li>WHO</li>
+                    <li>WHAT</li>
+                    <li>WHEN</li>
+                    <li>WHERE</li>
+                    <li>WHY</li>
+                    <li>HOW</li>
+                </ul>
+        <% end %>
+            </div>
+            <div id="main_body">
+                <%= yield %>
+            </div>
+        </div>
+    </body>
+</html>
