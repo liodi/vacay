@@ -9,13 +9,6 @@ body {
     overflow: auto;
     background-color: #FFFFFF;
 }
-#main_header {
-    /*width: inherit;*/
-    
-}
-#signout_btn_container {
-    overflow: auto;
-}
 #title {
     font-size: 35px;
     text-align: center;
@@ -30,6 +23,20 @@ body {
 #nav_bar li {
     display: inline;
     padding: 0 58px;
+}
+#main_footer {
+    margin-top: 200px;
+    background-color: #360101;
+    overflow: auto;
+    color: #9A6544;
+}
+#main_footer div {
+    float: right;
+    padding-right: 5px;
+}
+.logo {
+    width: 150px;
+    height: 30px;
 }
 
 /*Sign In*/

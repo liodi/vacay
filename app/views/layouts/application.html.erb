@@ -12,13 +12,6 @@
             <%- if logged_in? -%>
                 <p>Welcome <%= current_user.name %> (<%= current_user.email %>)</p>
                 <p><%= link_to 'Log Out', logout_path %></p>
-            <%- else -%>
-                <div>
-                    <a href="/users/new"><button>Sign Up</button></a>
-                </div>
-                <div>
-                    <a href="/sessions/new"><button>Sign In</button></a>
-                </div>
             <%- end -%>
                 <div id="title">
                     <h1>EYRIE VACAY</h1>
@@ -37,8 +30,10 @@
             <div id="main_body">
                 <%= yield %>
             </div>
-            <div>
-                <%=image_tag("squidbody.png")%>
+            <div id="main_footer">
+                <div>
+                    <%=image_tag("squidbody.png", class: "logo")%>
+                </div>
             </div>
         </div>
     </body>
