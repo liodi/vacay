@@ -33,14 +33,14 @@ body {
 }
 
 /*Sign In*/
-#sign_in {
+.login {
     width: 320px;
     margin: 0 auto 10px auto;
     overflow: auto;
     text-align: center;
     border: 1px solid #E5E6E6;
 }
-#sign_in h1 {
+.login h1 {
     margin: 5px;
 }
 .signin_input {

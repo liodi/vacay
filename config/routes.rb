@@ -13,10 +13,10 @@ Rails.application.routes.draw do
 
     #main
     get 'main', :to => 'main#index', :as => 'home'
-    get 'who', :to => 'main#who'
-    get 'what', :to => 'main#what'
-    get 'when', :to => 'main#when'
-    get 'where', :to => 'main#where'
-    get 'why', :to => 'main#why'
-    get 'how', :to => 'main#how'
+    get 'main/who', :to => 'main#who'
+    get 'main/what', :to => 'main#what'
+    get 'main/when', :to => 'main#when'
+    get 'main/where', :to => 'main#where'
+    get 'main/why', :to => 'main#why'
+    get 'main/how', :to => 'main#how'
 end
