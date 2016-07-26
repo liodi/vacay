@@ -3,29 +3,48 @@
     <head>
       <title>Eyrie Vacay</title>
       <%= stylesheet_link_tag    'application', media: 'screen', 'data-turbolinks-track' => true %>
-      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
       <%= csrf_meta_tags %>
     </head>
     <body>
         <div id="main_container">
             <div id="main_header">
-            <%- if logged_in? -%>
-                <p>Welcome <%= current_user.name %> (<%= current_user.email %>)</p>
-                <p><%= link_to 'Log Out', logout_path %></p>
-            <%- end -%>
                 <div id="title">
-                    <h1>EYRIE VACAY</h1>
+                    <a href="/main">
+                        <h1>EYRIE VACAY</h1>
+                    </a>
                 </div>
             <% if logged_in? %>
                 <ul id="nav_bar">
-                    <li>WHO</li>
-                    <li>WHAT</li>
-                    <li>WHEN</li>
-                    <li>WHERE</li>
-                    <li>WHY</li>
-                    <li>HOW</li>
+                    <li><a href="/main/who"><div class="nav_bar_option">WHO</div></a></li>
+                    <li><a href="/main/what"><div class="nav_bar_option">WHAT</div></a></li>
+                    <li><a href="/main/when"><div class="nav_bar_option">WHEN</div></a></li>
+                    <li><a href="/main/where"><div class="nav_bar_option">WHERE</div></a></li>
+                    <li><a href="/main/why"><div class="nav_bar_option">WHY</div></a></li>
+                    <li><a href="/main/how"><div class="nav_bar_option">HOW</div></a></li>
                 </ul>
-            <% end %>
+                <div id="clockdiv">
+                    <div>
+                        <span class="days"></span>
+                        <div class="smalltext">Days</div>
+                    </div>
+                    <div>
+                        <span class="hours"></span>
+                        <div class="smalltext">Hours</div>
+                    </div>
+                    <div>
+                        <span class="minutes"></span>
+                        <div class="smalltext">Minutes</div>
+                    </div>
+                    <div>
+                        <span class="seconds"></span>
+                        <div class="smalltext">Seconds</div>
+                    </div>
+                </div>
+                <div>
+                    Welcome, <%= current_user.name %>!
+                    <a href="/sessions/destroy"><button>Logout</button></a>
+                </div>
+            <%- end -%>
             </div>
             <div id="main_body">
                 <%= yield %>
@@ -37,4 +56,5 @@
             </div>
         </div>
     </body>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </html>

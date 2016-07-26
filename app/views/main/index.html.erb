@@ -2,10 +2,4 @@
     <% @test.each do |user| %>
         <%=user['name']%>
     <% end %>
-
-    <% @indexWords.each do |word| %>
-        <div class="index_word">
-            <a href="main/<%= word.downcase %>"><%= word %></a>
-        </div>
-    <% end %>
 <% end %>

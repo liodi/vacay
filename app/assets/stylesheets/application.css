@@ -2,6 +2,7 @@
 body {
     font-family: helvetica;
     background-color: #E5E6E6;
+    color: #2E1A1A;
 }
 #main_container {
     width: 1000px;
@@ -9,26 +10,49 @@ body {
     overflow: auto;
     background-color: #FFFFFF;
 }
+#logout_container {
+
+}
 #title {
     font-size: 35px;
     text-align: center;
 }
+#title a {
+    color: #2E1A1A;
+    text-decoration: none;
+}
 #title h1 {
-    margin: 5px;
+    margin: 0;
+    background-color: #AA3939;
 }
 #nav_bar {
     margin: 0 auto;
     padding: 0;
+    background-color: #AA3939;
 }
 #nav_bar li {
     display: inline;
-    padding: 0 58px;
+}
+.nav_bar_option:hover {
+    background-color: #00816A;
+}
+#nav_bar a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+#nav_bar a.hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+.nav_bar_option {
+    display: inline-block;
+    width: 160.62px;
+    text-align: center;
 }
 #main_footer {
     margin-top: 200px;
-    background-color: #360101;
+    background-color: #AA3939;
     overflow: auto;
-    color: #9A6544;
 }
 #main_footer div {
     float: right;
@@ -71,4 +95,31 @@ body {
     #main_container {
         display: none;
     }
+}
+
+/* Countdown */
+#clockdiv{
+    font-family: sans-serif;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 30px;
+    width: 360px;
+    margin: 0 auto;
+    padding: 5px 0;
+}
+#clockdiv > div{
+    padding: 10px;
+    border-radius: 3px;
+    background: #00BF96;
+    display: inline-block;
+}
+#clockdiv div > span{
+    padding: 15px;
+    border-radius: 3px;
+    background: #00816A;
+    display: inline-block;
+}
+.smalltext{
+    padding-top: 5px;
+    font-size: 16px;
 }
