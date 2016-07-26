@@ -23,26 +23,26 @@
                     <li><a href="/main/how"><div class="nav_bar_option">HOW</div></a></li>
                 </ul>
                 <div id="clockdiv">
-                    <div>
+                    <div class="outerclock">
                         <span class="days"></span>
                         <div class="smalltext">Days</div>
                     </div>
-                    <div>
+                    <div class="outerclock">
                         <span class="hours"></span>
                         <div class="smalltext">Hours</div>
                     </div>
-                    <div>
+                    <div class="outerclock">
                         <span class="minutes"></span>
                         <div class="smalltext">Minutes</div>
                     </div>
-                    <div>
+                    <div class="outerclock">
                         <span class="seconds"></span>
                         <div class="smalltext">Seconds</div>
                     </div>
-                </div>
-                <div>
-                    Welcome, <%= current_user.name %>!
-                    <a href="/sessions/destroy"><button>Logout</button></a>
+                    <div id="logout_container">
+                        Welcome, <%= current_user.name %>!
+                        <a href="/sessions/destroy"><button>Logout</button></a>
+                    </div>
                 </div>
             <%- end -%>
             </div>
