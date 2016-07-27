@@ -19,4 +19,6 @@ Rails.application.routes.draw do
     get 'main/where', :to => 'main#where', :as => 'where'
     get 'main/why',   :to => 'main#why',   :as => 'why'
     get 'main/how',   :to => 'main#how',   :as => 'how'
+
+    post 'main/when', :to => 'main#when_postback'
 end

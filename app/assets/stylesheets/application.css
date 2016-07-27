@@ -123,7 +123,7 @@ body {
 }
 .description {
     text-align: center;
-    margin-top: 0;
+    margin: 0 0 15px 0;
     color: gray;
 }
 .calendar_div {
@@ -154,4 +154,15 @@ body {
 .day_checkboxes {
     width: 50px;
     height: 50px;
+}
+
+.when_button {
+    margin: 0 auto;
+    width: 300px;
+    padding-top: 25px;
+}
+
+.when_button input {
+    width: 300px;
+    padding:30px;
 }
