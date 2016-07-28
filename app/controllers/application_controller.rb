@@ -184,7 +184,7 @@ class ApplicationController < ActionController::Base
             FROM user_day_choices udc
             LEFT JOIN users u ON u.id = udc.user_id
             WHERE day_id = #{dayId}
-            AND type = 'DINNER';"
+            AND type = 'DINNER'"
 
         return dbhDo(sql)
     end
@@ -200,9 +200,16 @@ class ApplicationController < ActionController::Base
             SELECT COUNT(*) AS count
             FROM user_day_choices
             WHERE user_id = #{userId}
-            AND type = 'NIGHT';
-        "
+            AND type = 'NIGHT'"
 
-        return dbhDo(sql)
+        count = 0
+        results = dbhDo(sql)
+        if results.size > 0
+            results.each do |entry|
+                count = entry['count']
+            end
+        end
+
+        return count
     end
 end
