@@ -43,7 +43,18 @@ class ApplicationController < ActionController::Base
     def getCalendarDays()
         sql = 'SELECT * FROM calendar_days'
 
-        return dbhDo(sql)
+        days = dbhDo(sql)
+        dayHash = {}
+        days.each do |day|
+            id = day['day_id'].to_int
+            dayName = day['day']
+            date = day['date'].to_s
+            date = date.split('-')
+            date = "#{date[1]}/#{date[2]}"
+            dayHash[id] = {:day => dayName, :date => date}
+        end
+
+        return dayHash
     end
 
     def updateUserDayChoices(nightChoices, dinnerChoices)
@@ -122,10 +133,9 @@ class ApplicationController < ActionController::Base
         return retDays
     end
 
-
     def getAllUserNights()
         sql = "
-            SELECT name, udc.day_id
+            SELECT user_id, name, udc.day_id
             FROM user_day_choices udc
             LEFT JOIN users u ON u.id = udc.user_id
             LEFT JOIN calendar_days cd ON cd.day_id = udc.day_id
@@ -133,11 +143,66 @@ class ApplicationController < ActionController::Base
 
         results = dbhDo(sql)
 
-        userDayHash = {}
+        userNightHash = {}
         if results.size > 0
             results.each do |entry|
-                
+                if userNightHash[entry['user_id']] == nil
+                    userNightHash[entry['user_id']] = {
+                        'name' => entry['name'],
+                        'days' => [entry['day_id']],
+                    }
+                else
+                    userNightHash[entry['user_id']]['days'].push(entry['day_id'])
+                end
             end
         end
+
+        return userNightHash
+    end
+
+    def getAllUserDinners()
+        userDinners = []
+
+        for i in 1..7
+            name = ''
+            results = getDinnerUser(i)
+            if results.size > 0
+                results.each do |entry|
+                    name = entry['name']
+                end
+            end
+
+            userDinners.push(name)
+        end
+
+        return userDinners
+    end
+
+    def getDinnerUser(dayId)
+        sql = "
+            SELECT name
+            FROM user_day_choices udc
+            LEFT JOIN users u ON u.id = udc.user_id
+            WHERE day_id = #{dayId}
+            AND type = 'DINNER';"
+
+        return dbhDo(sql)
+    end
+
+    def cost()
+        user = current_user()
+
+        return getUserNightCount(user['id'])
+    end
+
+    def getUserNightCount(userId)
+        sql = "
+            SELECT COUNT(*) AS count
+            FROM user_day_choices
+            WHERE user_id = #{userId}
+            AND type = 'NIGHT';
+        "
+
+        return dbhDo(sql)
     end
 end

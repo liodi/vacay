@@ -3,22 +3,17 @@ class MainController < ApplicationController
         @test = getAllUsers()
     end
 
+    def who
+        @allUserNights  = getAllUserNights()
+        @allUserDinners = getAllUserDinners()
+        @days           = getCalendarDays()
+    end
+
     def when
         @userNights    = getUserDays('NIGHT')
         @userDinners   = getUserDays('DINNER')
         @globalDinners = getGlobalDinners()
-
-        # Setup formatted hash
-        days = getCalendarDays()
-        @dayHash = {}
-        days.each do |day|
-            id = day['day_id'].to_int
-            dayName = day['day']
-            date = day['date'].to_s
-            date = date.split('-')
-            date = "#{date[1]}/#{date[2]}"
-            @dayHash[id] = {:day => dayName, :date => date}
-        end
+        @days          = getCalendarDays()
     end
 
     def when_postback
@@ -37,5 +32,9 @@ class MainController < ApplicationController
         updateUserDayChoices(nightChoices, dinnerChoices)
 
         redirect_to when_path
+    end
+
+    def how
+        @cost = cost()
     end
 end

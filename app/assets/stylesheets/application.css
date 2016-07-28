@@ -31,7 +31,7 @@ body {
     display: inline;
 }
 .nav_bar_option:hover {
-    background-color: #00816A;
+    background-color: #00BF96;
 }
 #nav_bar a {
     color: #FFFFFF;
@@ -165,4 +165,39 @@ body {
 .when_button input {
     width: 300px;
     padding:30px;
+}
+
+#who_night_calendar {
+    margin: 0 auto;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+#who_night_calendar th {
+    width: 100px;
+    padding: 0;
+    font-weight: normal;
+}
+
+#who_night_calendar tr {
+    height: 30px;
+}
+
+#who_night_calendar tr:nth-child(odd)
+{
+    background-color: #AA3939;
+    color: #FFFFFF;
+}
+
+.who_name {
+    background-color: #FFFFFF;
+    color: #2E1A1A;
+}
+
+#cost {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    widows: 200px
+    margin: 0 auto;
 }

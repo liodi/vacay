@@ -1,10 +1,47 @@
+
 <div>
     <h1 class="subtitle">who is going on this vacay</h1>
     <h4 class="description">-These people have had the grace to fill out the WHEN tab-</h4>
+    <table id="who_night_calendar">
+        <tr>
+            <th class="who_name"></th>
+            <% @days.each_key do |dayId| %>
+                <th ><%= @days[dayId][:day] %></th>
+            <% end %>
+            <th class="who_name"></th>
+        </tr>
+        <% @allUserNights.each_key do |userId| %>
+        <tr>
+            <td class="who_name"><%=@allUserNights[userId]['name']%></td>
+            <% for i in 1..7 %>
+                <td>
+                    <% if @allUserNights[userId]['days'].include? i%>
+                         ✓
+                    <% end %>
+                </td>
+            <% end %>
+            <td class="who_name"></td>
+        </tr>
+        <% end %>
+    </table>
 </div>
 <div>
     <h1 class="subtitle">who is making dinner each night</h1>
     <h4 class="description">-These people have truly stepped up to the plate-</h4>
+    <table id="who_night_calendar">
+        <tr>
+            <% @days.each_key do |dayId| %>
+                <th ><%= @days[dayId][:day] %></th>
+            <% end %>
+        </tr>
+        <tr>
+        <% @allUserDinners.each do |name| %>
+                <td>
+                    <%= name %>
+                </td>
+        <% end %>
+        </tr>
+    </table>
 </div>
 
 <!-- invite friends to create account page -->
