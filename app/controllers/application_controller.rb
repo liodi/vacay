@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
     # For APIs, you may want to use :null_session instead.
     protect_from_forgery with: :exception
     helper_method :current_user, :logged_in?
+    http_basic_authenticate_with name: "p", password: "p", except: :index
 
     def login(user)
         session[:user_id] = user.id
@@ -189,10 +190,17 @@ class ApplicationController < ActionController::Base
         return dbhDo(sql)
     end
 
-    def cost()
+    def userCost()
         user = current_user()
+        userNights = getUserNightCount(user['id']).to_f
+        totalNights = getTotalNightCount().to_f
 
-        return getUserNightCount(user['id'])
+        # TODO store this is global var table
+        totalCost = 700.00
+
+        cost = ((totalCost / totalNights) * userNights).round(2)
+
+        return cost
     end
 
     def getUserNightCount(userId)
@@ -201,6 +209,23 @@ class ApplicationController < ActionController::Base
             FROM user_day_choices
             WHERE user_id = #{userId}
             AND type = 'NIGHT'"
+
+        count = 0
+        results = dbhDo(sql)
+        if results.size > 0
+            results.each do |entry|
+                count = entry['count']
+            end
+        end
+
+        return count
+    end
+
+    def getTotalNightCount()
+        sql = "
+            SELECT COUNT(*) AS count
+            FROM user_day_choices
+            WHERE type = 'NIGHT'"
 
         count = 0
         results = dbhDo(sql)

@@ -17,16 +17,14 @@ class MainController < ApplicationController
     end
 
     def when_postback
+        nightChoices = []
         if params[:night_choices] != nil
             nightChoices = params[:night_choices]
-        else
-            nightChoices = []
         end
 
+        dinnerChoices = []
         if params[:dinner_choices] != nil
             dinnerChoices = params[:dinner_choices]
-        else
-            dinnerChoices = []
         end
 
         updateUserDayChoices(nightChoices, dinnerChoices)
@@ -35,6 +33,6 @@ class MainController < ApplicationController
     end
 
     def how
-        @cost = cost()
+        @cost = userCost()
     end
 end
