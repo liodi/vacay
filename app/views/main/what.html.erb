@@ -1,6 +1,52 @@
 <div>
-    <h1 class="subtitle">what are we doing on this vacay</h1>
-    <h4 class="description"> -Dive into some ideas from your peers - or create your own-</h4>
+    <div class="idea_container">
+        <h1 class="subtitle">what are we doing on this vacay</h1>
+        <h4 class="description">-Dive into some ideas from your peers - or create your own-</h4>
+        <div class="ideas">
+            <div class="ideas_header">
+                <div class="create_idea_container">
+                    <button onclick="openModal();">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="idea_container">
+        <h1 class="subtitle">what are we eating for breakfast on this vacay</h1>
+        <h4 class="description">-Here's what your pals are suggesting for the most important meal of the day-</h4>
+        <div class="ideas">
+            <div class="ideas_header">
+                <div class="create_idea_container">
+                    <button onclick="openModal();">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="idea_container">
+        <h1 class="subtitle">what are we eating for lunch on this vacay</h1>
+        <h4 class="description">-Here are some midday feast ideas your charming partners in crime-</h4>
+        <div class="ideas">
+            <div class="ideas_header">
+                <div class="create_idea_container">
+                    <button onclick="openModal();">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- Basic forum -> vote and rearrange by most popular -->
+<div id="idea_modal">
+    <div class="modal_content">
+        <span class="close">x</span>
+        <h4>Submit a link for your pals to scrutinize:</h4>
+        <form action="/main/what" method="POST">
+            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+            <input name="idea_type" id="idea_type" value="GENERAL" type="hidden">
+            <input type="text" name="link" class="modal_input" placeholder="Link">
+            <br>
+            <input type="text" name="description" class="modal_input" placeholder="Description">
+            <div class="when_button">
+                <input name="submit_idea" type="submit" value="Submit Link">
+            </div>
+        </form>
+    </div>
+</div>

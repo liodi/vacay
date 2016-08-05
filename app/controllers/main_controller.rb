@@ -32,6 +32,16 @@ class MainController < ApplicationController
         redirect_to when_path
     end
 
+    def what_postback
+        ideaType = params[:idea_type]
+        link = params[:link]
+        description = params[:description]
+
+        insertIdea(ideaType, link, description)
+
+        redirect_to what_path
+    end
+
     def how
         @cost = userCost()
     end

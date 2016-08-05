@@ -57,3 +57,19 @@ function initializeClock(id, endtime) {
 
 var deadline = new Date(Date.parse(new Date('August 27, 2016')));
 initializeClock('clockdiv', deadline);
+
+var span = document.getElementsByClassName("close")[0];
+
+function openModal() {
+    document.getElementById('idea_modal').style.display = "block";
+}
+
+span.onclick = function() {
+    document.getElementById('idea_modal').style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == document.getElementById('idea_modal')) {
+        document.getElementById('idea_modal').style.display = "none";
+    }
+}

@@ -195,7 +195,7 @@ class ApplicationController < ActionController::Base
         userNights = getUserNightCount(user['id']).to_f
         totalNights = getTotalNightCount().to_f
 
-        # TODO store this is global var table
+        # TODO store this in global var table
         totalCost = 700.00
 
         cost = ((totalCost / totalNights) * userNights).round(2)
@@ -236,5 +236,16 @@ class ApplicationController < ActionController::Base
         end
 
         return count
+    end
+
+    def insertIdea(ideaType, link, description)
+        user = current_user()
+
+        sql = "
+            INSERT INTO user_ideas
+            (user_id, type, link, description)
+            VALUES (#{user[:id]}, '#{ideaType}', '#{link}', '#{description}')"
+
+        dbhDo(sql)
     end
 end

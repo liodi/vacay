@@ -21,4 +21,5 @@ Rails.application.routes.draw do
     get 'main/how',   :to => 'main#how',   :as => 'how'
 
     post 'main/when', :to => 'main#when_postback'
+    post 'main/what', :to => 'main#what_postback'
 end
