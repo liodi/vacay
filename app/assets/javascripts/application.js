@@ -60,8 +60,9 @@ initializeClock('clockdiv', deadline);
 
 var span = document.getElementsByClassName("close")[0];
 
-function openModal() {
+function openIdeaModal(type) {
     document.getElementById('idea_modal').style.display = "block";
+    document.getElementById('idea_type').value = type;
 }
 
 span.onclick = function() {

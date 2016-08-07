@@ -15,7 +15,7 @@ body {
     text-align: center;
 }
 #title a {
-    color: #2E1A1A;
+    color: #FFFFFF;
     text-decoration: none;
 }
 #title h1 {
@@ -214,8 +214,59 @@ body {
     padding: 1px 0.5px 1px 0;
 }
 
+.individual_idea {
+    background-color: #FFFFFF;
+    border-bottom: solid #AA3939 1px;
+    overflow: auto;
+}
+
+.ideas_header {
+    background-color: #AA3939;
+    overflow: auto;
+}
+
 .create_idea_container {
     float: right;
+}
+
+.idea {
+    background-color: #FFFFFF;
+    width: 91%;
+    float: left;
+    padding-top: 27px;
+}
+
+.idea a {
+    text-decoration: none;
+}
+
+.vote_container {
+    width: 4%;
+    overflow: auto;
+    float: left;
+    font-size: 30px;
+    padding-left: 5px;
+    color: gray;
+}
+
+.vote_arrow:hover {
+    cursor: pointer;
+}
+
+.vote_arrow_active {
+    color: #00BF96;
+}
+
+.number_votes {
+    width: 4%;
+    padding-top: 27px;
+    float: left;
+}
+
+.idea_name {
+    padding-left: 10px;
+    color: gray;
+    font-size: 12px;
 }
 
 #idea_modal {

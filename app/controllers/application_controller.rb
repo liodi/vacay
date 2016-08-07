@@ -248,4 +248,14 @@ class ApplicationController < ActionController::Base
 
         dbhDo(sql)
     end
+
+    def getIdeas(ideaType)
+        sql = "
+            SELECT ui.*, u.name
+            FROM user_ideas ui
+            LEFT JOIN users u ON u.id = ui.user_id
+            WHERE type = '#{ideaType}'"
+
+        return dbhDo(sql)
+    end
 end

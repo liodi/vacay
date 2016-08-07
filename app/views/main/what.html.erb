@@ -2,34 +2,45 @@
     <div class="idea_container">
         <h1 class="subtitle">what are we doing on this vacay</h1>
         <h4 class="description">-Dive into some ideas from your peers - or create your own-</h4>
-        <div class="ideas">
-            <div class="ideas_header">
-                <div class="create_idea_container">
-                    <button onclick="openModal();">+</button>
-                </div>
+        <div class="ideas_header">
+            <div class="create_idea_container">
+                <button onclick="openIdeaModal('GENERAL');">+</button>
             </div>
+        </div>
+        <div class="ideas" id="generalIdeas">
+            
         </div>
     </div>
     <div class="idea_container">
         <h1 class="subtitle">what are we eating for breakfast on this vacay</h1>
         <h4 class="description">-Here's what your pals are suggesting for the most important meal of the day-</h4>
-        <div class="ideas">
-            <div class="ideas_header">
-                <div class="create_idea_container">
-                    <button onclick="openModal();">+</button>
-                </div>
+        <div class="ideas_header">
+            <div class="create_idea_container">
+                <button onclick="openIdeaModal('BREAKFAST');">+</button>
             </div>
+        </div>
+        <div class="ideas">
+            <% @breakfastIdeas.each do |idea| %>
+                <div class="idea">
+                    <a href="<%= idea['link'] %>"><%= idea['description'] %></a>
+                </div>
+            <% end %>
         </div>
     </div>
     <div class="idea_container">
         <h1 class="subtitle">what are we eating for lunch on this vacay</h1>
         <h4 class="description">-Here are some midday feast ideas your charming partners in crime-</h4>
-        <div class="ideas">
-            <div class="ideas_header">
-                <div class="create_idea_container">
-                    <button onclick="openModal();">+</button>
-                </div>
+        <div class="ideas_header">
+            <div class="create_idea_container">
+                <button onclick="openIdeaModal('LUNCH');">+</button>
             </div>
+        </div>
+        <div class="ideas">
+            <% @lunchIdeas.each do |idea| %>
+                <div class="idea">
+                    <%= idea['link'] %>
+                </div>
+            <% end %>
         </div>
     </div>
 </div>
@@ -40,7 +51,7 @@
         <h4>Submit a link for your pals to scrutinize:</h4>
         <form action="/main/what" method="POST">
             <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-            <input name="idea_type" id="idea_type" value="GENERAL" type="hidden">
+            <input name="idea_type" id="idea_type" value="" type="hidden">
             <input type="text" name="link" class="modal_input" placeholder="Link">
             <br>
             <input type="text" name="description" class="modal_input" placeholder="Description">
@@ -50,3 +61,35 @@
         </form>
     </div>
 </div>
+
+<script type="text/javascript">
+    var generalIdeas = <%=@generalIdeas%>;
+
+    generateIdeasDiv(generalIdeas, "generalIdeas");
+
+    function sortIdeas(ideas) {
+        ideas.sort(function(a, b) {
+            return parseInt(b.votes) - parseInt(a.votes);
+        });
+
+        return ideas;
+    }
+
+    function generateIdeasDiv(ideas, divId) {
+        sortIdeas(ideas);
+
+        var ideaTxt = "";
+        for (var i = 0; i < ideas.length; i++) {
+            idea = ideas[i];
+            ideaTxt += "<div class='individual_idea'><div class='vote_container'><span class='vote_arrow' onclick='updateVote(this, &quot;up&quot;);'>&#8657;</span><br><span class='vote_arrow' onclick='updateVote(this, &quot;down&quot;);'>&#8659;</span></div><div class='number_votes'>" + idea.votes + "</div><div class='idea'><a href='" + idea.link + "'>" + idea.description + "</a><br><span class='idea_name'>Submitted by " + idea.name + "</span></div></div>";
+        }
+
+        document.getElementById(divId).innerHTML = ideaTxt;
+
+    }
+
+    function updateVote(span, direction) {
+        span.classList.toggle('vote_arrow_active');
+    }
+
+</script>

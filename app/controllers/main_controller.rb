@@ -32,6 +32,12 @@ class MainController < ApplicationController
         redirect_to when_path
     end
 
+    def what
+        @generalIdeas   = getIdeas('GENERAL').to_json.html_safe
+        @breakfastIdeas = getIdeas('BREAKFAST')
+        @lunchIdeas     = getIdeas('LUNCH')
+    end
+
     def what_postback
         ideaType = params[:idea_type]
         link = params[:link]
