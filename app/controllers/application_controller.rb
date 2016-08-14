@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
         dbh = Mysql2::Client.new(
             host: "127.0.0.1",
             username: "root",
-            password: "joseph92",
+            password: "itat3767",
             database: "vacay_development",
             port: 3306
         )
