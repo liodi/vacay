@@ -157,6 +157,10 @@
             if (status == 'success')
             {
                 updateVoteOnPage(span, data.ideaVoteCount, voteAction);
+                userVotes = data.userVotes;
+                populateIdeasDiv(data.generalIdeas, "generalIdeas");
+                populateIdeasDiv(data.breakfastIdeas, "breakfastIdeas");
+                populateIdeasDiv(data.lunchIdeas, "lunchIdeas");
             }
         });
     }

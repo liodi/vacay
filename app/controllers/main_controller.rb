@@ -64,9 +64,21 @@ class MainController < ApplicationController
         end
 
         @newVoteCount = getIdeaVoteCount(ideaId)
+        @generalIdeas   = getIdeas('GENERAL')
+        @breakfastIdeas = getIdeas('BREAKFAST')
+        @lunchIdeas     = getIdeas('LUNCH')
+        @userVotes = getUserIdeaVotes()
 
         respond_to do |format|
-            format.json { render json: {:ideaVoteCount => @newVoteCount} }
+            format.json {
+                render json: {
+                    :ideaVoteCount  => @newVoteCount,
+                    :generalIdeas   => @generalIdeas,
+                    :breakfastIdeas => @breakfastIdeas,
+                    :lunchIdeas     => @lunchIdeas,
+                    :userVotes      => @userVotes,
+                }
+            }
         end
         # redirect_to what_path
     end
