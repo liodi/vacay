@@ -34,8 +34,8 @@ class MainController < ApplicationController
 
     def what
         @generalIdeas   = getIdeas('GENERAL').to_json.html_safe
-        @breakfastIdeas = getIdeas('BREAKFAST')
-        @lunchIdeas     = getIdeas('LUNCH')
+        @breakfastIdeas = getIdeas('BREAKFAST').to_json.html_safe
+        @lunchIdeas     = getIdeas('LUNCH').to_json.html_safe
 
         @userVotes = getUserIdeaVotes().to_json.html_safe
     end

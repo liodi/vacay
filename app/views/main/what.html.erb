@@ -8,7 +8,6 @@
             </div>
         </div>
         <div class="ideas" id="generalIdeas">
-            
         </div>
     </div>
     <div class="idea_container">
@@ -19,12 +18,7 @@
                 <button onclick="openIdeaModal('BREAKFAST');">+</button>
             </div>
         </div>
-        <div class="ideas">
-            <% @breakfastIdeas.each do |idea| %>
-                <div class="idea">
-                    <a href="<%= idea['link'] %>"><%= idea['description'] %></a>
-                </div>
-            <% end %>
+        <div class="ideas" id="breakfastIdeas">
         </div>
     </div>
     <div class="idea_container">
@@ -35,12 +29,7 @@
                 <button onclick="openIdeaModal('LUNCH');">+</button>
             </div>
         </div>
-        <div class="ideas">
-            <% @lunchIdeas.each do |idea| %>
-                <div class="idea">
-                    <%= idea['link'] %>
-                </div>
-            <% end %>
+        <div class="ideas" id="lunchIdeas">
         </div>
     </div>
 </div>
@@ -64,10 +53,14 @@
 
 <script type="text/javascript">
     var generalIdeas = <%=@generalIdeas%>;
+    var breakfastIdeas = <%=@breakfastIdeas%>;
+    var lunchIdeas = <%=@lunchIdeas%>;
 
     var userVotes = <%=@userVotes%>;
 
     populateIdeasDiv(generalIdeas, "generalIdeas");
+    populateIdeasDiv(breakfastIdeas, "breakfastIdeas");
+    populateIdeasDiv(lunchIdeas, "lunchIdeas");
 
     function sortIdeas(ideas)
     {
@@ -164,7 +157,6 @@
             if (status == 'success')
             {
                 updateVoteOnPage(span, data.ideaVoteCount, voteAction);
-                // rearrangeIdeas()
             }
         });
     }
