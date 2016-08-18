@@ -36,6 +36,8 @@ class MainController < ApplicationController
         @generalIdeas   = getIdeas('GENERAL').to_json.html_safe
         @breakfastIdeas = getIdeas('BREAKFAST')
         @lunchIdeas     = getIdeas('LUNCH')
+
+        @userVotes = getUserIdeaVotes().to_json.html_safe
     end
 
     def what_postback
@@ -46,6 +48,27 @@ class MainController < ApplicationController
         insertIdea(ideaType, link, description)
 
         redirect_to what_path
+    end
+
+    def what_idea_postback
+        ideaId = params[:idea_id]
+        voteAction = params[:vote_action]
+        voteValue = params[:vote_value]
+
+        if voteAction == 'neutral'
+            deleteVote(ideaId);
+        elsif voteAction == 'negate'
+            updateVote(ideaId, voteValue);
+        else
+            insertVote(ideaId, voteValue)
+        end
+
+        @newVoteCount = getIdeaVoteCount(ideaId)
+
+        respond_to do |format|
+            format.json { render json: {:ideaVoteCount => @newVoteCount} }
+        end
+        # redirect_to what_path
     end
 
     def how

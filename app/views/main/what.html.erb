@@ -65,9 +65,12 @@
 <script type="text/javascript">
     var generalIdeas = <%=@generalIdeas%>;
 
-    generateIdeasDiv(generalIdeas, "generalIdeas");
+    var userVotes = <%=@userVotes%>;
 
-    function sortIdeas(ideas) {
+    populateIdeasDiv(generalIdeas, "generalIdeas");
+
+    function sortIdeas(ideas)
+    {
         ideas.sort(function(a, b) {
             return parseInt(b.votes) - parseInt(a.votes);
         });
@@ -75,20 +78,95 @@
         return ideas;
     }
 
-    function generateIdeasDiv(ideas, divId) {
+    function populateIdeasDiv(ideas, divId)
+    {
         sortIdeas(ideas);
 
         var ideaTxt = "";
-        for (var i = 0; i < ideas.length; i++) {
+        for (var i = 0; i < ideas.length; i++)
+        {
             idea = ideas[i];
-            ideaTxt += "<div class='individual_idea'><div class='vote_container'><span class='vote_arrow' onclick='updateVote(this, &quot;up&quot;);'>&#8657;</span><br><span class='vote_arrow' onclick='updateVote(this, &quot;down&quot;);'>&#8659;</span></div><div class='number_votes'>" + idea.votes + "</div><div class='idea'><a href='" + idea.link + "'>" + idea.description + "</a><br><span class='idea_name'>Submitted by " + idea.name + "</span></div></div>";
+
+            voteUpFlag = '';
+            voteDownFlag = '';
+            for (var k = 0; k < userVotes.length; k++)
+            {
+                vote = userVotes[k];
+                if (idea.id == vote.idea_id)
+                {
+                    if (vote.vote == 1)
+                    {
+                        voteUpFlag = 'vote_arrow_active';
+                    }
+                    else
+                    {
+                        voteDownFlag = 'vote_arrow_active';
+                    }
+                }
+            }
+
+            ideaTxt +=
+                "<div class='individual_idea'>" +
+                    "<div class='vote_container'>" +
+                        "<span class='vote_arrow " + voteUpFlag + "' onclick='handleVote(this, &quot;up&quot;, " + idea.id + ", 1);'>&#8657;</span><br>" +
+                        "<span class='vote_arrow " + voteDownFlag + "' onclick='handleVote(this, &quot;down&quot;, " + idea.id + ", -1);'>&#8659;</span>" +
+                    "</div>" +
+                    "<div class='number_votes'>" + idea.votes + "</div>" +
+                    "<div class='idea'>" +
+                        "<a href='" + idea.link + "'>" + idea.description + "</a><br>"+ 
+                        "<span class='idea_name'>Submitted by " + idea.name + "</span>" +
+                    "</div>" +
+                "</div>";
         }
 
         document.getElementById(divId).innerHTML = ideaTxt;
     }
 
-    function updateVote(span, direction) {
+    function updateVoteOnPage(span, ideaVoteCount, voteAction)
+    {
+        updateArrow(span, voteAction);
+        updateVoteCount(span, ideaVoteCount);
+    }
+
+    function updateArrow(span, voteAction)
+    {
+        if (voteAction == 'negate')
+        {
+            $(span).siblings('span')[0].classList.toggle('vote_arrow_active');
+        }
+
         span.classList.toggle('vote_arrow_active');
+    }
+
+    function updateVoteCount(span, ideaVoteCount)
+    {
+        $(span).parent().siblings()[0].innerHTML = ideaVoteCount;
+    }
+
+    function handleVote(span, voteAction, ideaId, voteValue)
+    {
+        if (span.classList.contains('vote_arrow_active'))
+        {
+            voteAction = 'neutral';
+        }
+        else if ($(span).siblings('span')[0].classList.contains('vote_arrow_active'))
+        {
+            voteAction = 'negate';
+        }
+
+        $.post("/main/what_idea",
+        {
+            idea_id: ideaId,
+            vote_action: voteAction,
+            vote_value: voteValue,
+        },
+        function(data, status){
+            if (status == 'success')
+            {
+                updateVoteOnPage(span, data.ideaVoteCount, voteAction);
+                // rearrangeIdeas()
+            }
+        });
     }
 
 </script>

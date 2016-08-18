@@ -22,4 +22,6 @@ Rails.application.routes.draw do
 
     post 'main/when', :to => 'main#when_postback'
     post 'main/what', :to => 'main#what_postback'
+
+    post 'main/what_idea', :to => 'main#what_idea_postback'
 end

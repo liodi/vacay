@@ -251,11 +251,80 @@ class ApplicationController < ActionController::Base
 
     def getIdeas(ideaType)
         sql = "
-            SELECT ui.*, u.name
+            SELECT
+                ui.*,
+                u.name,
+                IFNULL(SUM(uiv.vote), 0) AS votes
             FROM user_ideas ui
             LEFT JOIN users u ON u.id = ui.user_id
-            WHERE type = '#{ideaType}'"
+            LEFT JOIN user_idea_votes uiv ON uiv.idea_id = ui.id
+            WHERE type = '#{ideaType}'
+            GROUP BY ui.id"
 
         return dbhDo(sql)
+    end
+
+    def getUserIdeaVotes()
+        user = current_user()
+
+        sql = "
+            SELECT *
+            FROM user_idea_votes
+            WHERE user_id = #{user[:id]}"
+
+        return dbhDo(sql)
+    end
+
+    def insertVote(ideaId, vote)
+        user = current_user()
+
+        sql = "
+            INSERT INTO user_idea_votes
+            (idea_id, user_id, vote)
+            VALUES (#{ideaId}, #{user[:id]}, '#{vote}')"
+
+        dbhDo(sql)
+    end
+
+    def updateVote(ideaId, vote)
+        user = current_user()
+
+        sql = "
+            UPDATE user_idea_votes
+            SET vote = #{vote}
+            WHERE idea_id = #{ideaId}
+            AND user_id = #{user[:id]}"
+
+        dbhDo(sql)
+    end
+
+    def deleteVote(ideaId)
+        user = current_user()
+
+        sql = "
+            DELETE FROM user_idea_votes
+            WHERE idea_id = #{ideaId}
+            AND user_id = #{user[:id]}"
+
+        dbhDo(sql)
+    end
+
+    def getIdeaVoteCount(ideaId)
+        sql = "
+            SELECT
+            IFNULL(SUM(uiv.vote), 0) AS count
+            FROM user_idea_votes uiv
+            WHERE idea_id = '#{ideaId}'
+            GROUP BY uiv.idea_id"
+
+        count = 0
+        results = dbhDo(sql)
+        if results.size > 0
+            results.each do |entry|
+                count = entry['count']
+            end
+        end
+
+        return count
     end
 end
