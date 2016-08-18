@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
     # For APIs, you may want to use :null_session instead.
     protect_from_forgery with: :exception
     helper_method :current_user, :logged_in?
-    http_basic_authenticate_with name: "p", password: "p", except: :index
+    # http_basic_authenticate_with name: "p", password: "p", except: :index
 
     def login(user)
         session[:user_id] = user.id
