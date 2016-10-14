@@ -196,7 +196,7 @@ class ApplicationController < ActionController::Base
         totalNights = getTotalNightCount().to_f
 
         # TODO store this in global var table
-        totalCost = 700.00
+        totalCost = 1058.87
 
         cost = ((totalCost / totalNights) * userNights).round(2)
 
